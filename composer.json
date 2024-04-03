@@ -1,0 +1,65 @@
+{
+    "name": "setono/seo-bundle",
+    "description": "A Symfony SEO bundle for your application",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Joachim Løvgaard",
+            "email": "joachim@loevgaard.dk"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "doctrine/collections": "1.8 || ^2.1",
+        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/orm": "^2.16",
+        "doctrine/persistence": "2.5 || ^3.2",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/property-access": "^6.4 || ^7.0",
+        "symfony/twig-bundle": "^6.4 || ^7.0",
+        "twig/twig": "^2.15 || ^3.7"
+    },
+    "require-dev": {
+        "infection/infection": "^0.26",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3 || ^5.1",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.6",
+        "psalm/plugin-phpunit": "^0.19",
+        "psalm/plugin-symfony": "^5.0",
+        "setono/code-quality-pack": "^2.7"
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Setono\\SEOBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Setono\\SEOBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "scripts": {
+        "analyse": "psalm",
+        "check-style": "ecs check",
+        "fix-style": "ecs check --fix",
+        "phpunit": "phpunit"
+    }
+}
