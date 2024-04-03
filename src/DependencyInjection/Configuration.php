@@ -24,18 +24,17 @@ final class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('page')
-                            ->info('The class that implements the page interface')
+                            ->info('The page entity')
                             ->defaultValue(Page::class)
                         ->end()
                         ->scalarNode('page_data')
-                            ->info('The class that implements the page data interface')
+                            ->info('The page data object that holds the data for the page entity on a specific page')
                             ->defaultValue(PageData::class)
                         ->end()
-
                     ->end()
                 ->end()
                 ->scalarNode('discriminator')
-                    ->info('The name of the discriminator or a service id that implements the discriminator interface')
+                    ->info('The name of the discriminator or a service id that implements the discriminator interface. Valid values are "null", "locale", "hostname" or a service id')
                     ->defaultValue('null')
         ;
 
