@@ -15,16 +15,20 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^2.16",
         "doctrine/persistence": "2.5 || ^3.2",
+        "psr/log": "^1.1 || ^2.0 || ^3.0",
         "symfony/config": "^6.4 || ^7.0",
         "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/event-dispatcher": "^6.4 || ^7.0",
+        "symfony/http-foundation": "^6.4 || ^7.0",
         "symfony/http-kernel": "^6.4 || ^7.0",
         "symfony/monolog-bundle": "^3.10",
         "symfony/property-access": "^6.4 || ^7.0",
         "symfony/twig-bundle": "^6.4 || ^7.0",
-        "twig/twig": "^2.15 || ^3.7"
+        "twig/twig": "^2.15 || ^3.7",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "infection/infection": "^0.26",
+        "infection/infection": "^0.28",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3 || ^5.1",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.6",
