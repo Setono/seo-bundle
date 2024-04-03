@@ -31,7 +31,7 @@ jobs:
                     coverage: "none"
 
             -   name: "Install composer dependencies"
-                uses: "ramsey/composer-install@v2"
+                uses: "ramsey/composer-install@v3"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
 
@@ -60,11 +60,8 @@ jobs:
                     - "highest"
 
                 symfony:
-                    - "~5.4.0"
-                    - "~6.0.0"
-                    - "~6.1.0"
-                    - "~6.2.0"
-                    - "~6.3.0"
+                    - "~6.4.0"
+                    - "~7.0.0"
         
         steps:
             -   name: "Checkout"
@@ -78,7 +75,7 @@ jobs:
                     tools: "composer-require-checker, composer-unused, flex"
 
             -   name: "Install composer dependencies"
-                uses: "ramsey/composer-install@v2"
+                uses: "ramsey/composer-install@v3"
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
                 with:
@@ -106,11 +103,8 @@ jobs:
                     - "highest"
 
                 symfony:
-                    - "~5.4.0"
-                    - "~6.0.0"
-                    - "~6.1.0"
-                    - "~6.2.0"
-                    - "~6.3.0"
+                    - "~6.4.0"
+                    - "~7.0.0"
 
         steps:
             -   name: "Checkout"
@@ -124,7 +118,7 @@ jobs:
                     tools: "flex"
 
             -   name: "Install composer dependencies"
-                uses: "ramsey/composer-install@v2"
+                uses: "ramsey/composer-install@v3"
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
                 with:
@@ -149,11 +143,8 @@ jobs:
                     - "highest"
 
                 symfony:
-                    - "~5.4.0"
-                    - "~6.0.0"
-                    - "~6.1.0"
-                    - "~6.2.0"
-                    - "~6.3.0"
+                    - "~6.4.0"
+                    - "~7.0.0"
 
         steps:
             -   name: "Checkout"
@@ -167,7 +158,7 @@ jobs:
                     tools: "flex"
 
             -   name: "Install composer dependencies"
-                uses: "ramsey/composer-install@v2"
+                uses: "ramsey/composer-install@v3"
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
                 with:
@@ -203,7 +194,7 @@ jobs:
                 run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
 
             -   name: "Install composer dependencies"
-                uses: "ramsey/composer-install@v2"
+                uses: "ramsey/composer-install@v3"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
 
@@ -239,7 +230,7 @@ jobs:
                     php-version: "${{ matrix.php-version }}"
 
             -   name: "Install composer dependencies"
-                uses: "ramsey/composer-install@v2"
+                uses: "ramsey/composer-install@v3"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
 
