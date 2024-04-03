@@ -33,7 +33,7 @@ final class SetonoSEOExtension extends Extension
         $container->setParameter('setono_seo.page.class', $config['classes']['page']);
         $container->setParameter('setono_seo.page_data.class', $config['classes']['page_data']);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');
     }
 }
