@@ -12,8 +12,8 @@ TODO
 [ico-version]: https://poser.pugx.org/setono/seo-bundle/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/seo-bundle/v/unstable
 [ico-license]: https://poser.pugx.org/setono/seo-bundle/license
-[ico-github-actions]: https://github.com/Setono/SEOBundle/workflows/build/badge.svg
-[ico-code-coverage]: https://codecov.io/gh/Setono/SEOBundle/branch/master/graph/badge.svg
+[ico-github-actions]: https://github.com/Setono/seo-bundle/workflows/build/badge.svg
+[ico-code-coverage]: https://codecov.io/gh/Setono/seo-bundle/branch/master/graph/badge.svg
 [ico-infection]: https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2FSetono%2Fseo-bundle%2Fmaster
 
 [link-packagist]: https://packagist.org/packages/setono/seo-bundle
