@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\SEOBundle\Resolver;
+namespace Setono\SEOBundle\Provider;
 
 use Setono\SEOBundle\Context\ControllerContextInterface;
 use Setono\SEOBundle\Data\PageDataInterface;
@@ -10,8 +10,7 @@ use Setono\SEOBundle\DataMapper\PageDataMapperInterface;
 use Setono\SEOBundle\Factory\PageDataFactoryInterface;
 use Setono\SEOBundle\Manager\PageManagerInterface;
 
-// todo rename to PageDataProvider
-final class PageDataResolver implements PageDataResolverInterface
+final class PageDataProvider implements PageDataProviderInterface
 {
     public function __construct(
         private readonly ControllerContextInterface $controllerContext,

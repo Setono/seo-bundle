@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Setono\SEOBundle\Resolver;
+namespace Setono\SEOBundle\Provider;
 
 use Setono\SEOBundle\Data\PageDataInterface;
 
-interface PageDataResolverInterface
+interface PageDataProviderInterface
 {
     public function getPageData(): PageDataInterface;
 }

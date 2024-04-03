@@ -9,14 +9,14 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Setono\SEOBundle\Data\PageDataContextAwareInterface;
 use Setono\SEOBundle\Data\PageDataInterface;
-use Setono\SEOBundle\Resolver\PageDataResolverInterface;
+use Setono\SEOBundle\Provider\PageDataProviderInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
 final class Runtime implements RuntimeExtensionInterface, LoggerAwareInterface
 {
     private LoggerInterface $logger;
 
-    public function __construct(private readonly PageDataResolverInterface $pageDataResolver)
+    public function __construct(private readonly PageDataProviderInterface $pageDataProvider)
     {
         $this->logger = new NullLogger();
     }
@@ -52,7 +52,7 @@ final class Runtime implements RuntimeExtensionInterface, LoggerAwareInterface
     private function get(callable $callable, array $context): mixed
     {
         try {
-            $pageData = $this->pageDataResolver->getPageData();
+            $pageData = $this->pageDataProvider->getPageData();
         } catch (\Throwable $e) {
             $this->logger->error(sprintf('Could not resolve page data. Error was: %s', $e->getMessage()));
 
