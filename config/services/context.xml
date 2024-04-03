@@ -4,8 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="setono_seo.context.controller" class="Setono\SEOBundle\Context\ControllerContext">
-            <argument type="service" id="setono_seo.resolver.callable_name"/>
-
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>
