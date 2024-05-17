@@ -22,7 +22,7 @@ class Page implements PageInterface
 
     protected ?string $discriminator = null;
 
-    protected bool $noIndex = false;
+    protected ?bool $noIndex = null;
 
     protected ?string $metaTitle = null;
 
@@ -50,7 +50,12 @@ class Page implements PageInterface
         return $this;
     }
 
-    public function isParent(): bool
+    public function hasParent(): bool
+    {
+        return $this->parent !== null;
+    }
+
+    public function isRoot(): bool
     {
         return $this->getParent() === null;
     }
@@ -106,12 +111,12 @@ class Page implements PageInterface
         return $this;
     }
 
-    public function isNoIndex(): bool
+    public function isNoIndex(): ?bool
     {
         return $this->noIndex;
     }
 
-    public function setNoIndex(bool $noIndex): static
+    public function setNoIndex(?bool $noIndex): static
     {
         $this->noIndex = $noIndex;
 

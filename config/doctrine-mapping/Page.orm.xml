@@ -17,7 +17,7 @@
 
         <field name="metaTitle" type="text" nullable="true"/>
         <field name="metaDescription" type="text" nullable="true"/>
-        <field name="noIndex" type="boolean"/>
+        <field name="noIndex" type="boolean" nullable="true"/>
 
         <indexes>
             <index name="idx_controller" columns="controller"/>

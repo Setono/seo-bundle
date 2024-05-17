@@ -20,18 +20,23 @@ final class PageDataMapperTest extends TestCase
     public function it_maps(): void
     {
         $mapper = new PageDataMapper();
-        $page = new Page();
-        $page
-            ->setNoIndex(true)
+
+        $child = new Page();
+        $child
             ->setMetaTitle('title')
             ->setMetaDescription('description')
         ;
+
+        $parent = new Page();
+        $parent->setNoIndex(true);
+        $parent->addChild($child);
+
         $pageData = new PageData();
 
-        $mapper->map($page, $pageData);
+        $mapper->map($child, $pageData);
 
-        self::assertTrue($pageData->isNoIndex());
-        self::assertSame('title', $pageData->getMetaTitle());
-        self::assertSame('description', $pageData->getMetaDescription());
+        self::assertTrue($pageData->noIndex);
+        self::assertSame('title', $pageData->metaTitle);
+        self::assertSame('description', $pageData->metaDescription);
     }
 }
