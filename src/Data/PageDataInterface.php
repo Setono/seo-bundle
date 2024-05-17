@@ -7,7 +7,7 @@ namespace Setono\SEOBundle\Data;
 interface PageDataInterface
 {
     /**
-     * Returns true if the page should be noindexed
+     * Returns true if the page should be no indexed
      */
     public function isNoIndex(): bool;
 
