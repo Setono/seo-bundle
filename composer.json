@@ -35,7 +35,7 @@
         "phpunit/phpunit": "^9.6",
         "psalm/plugin-phpunit": "^0.19",
         "psalm/plugin-symfony": "^5.1",
-        "setono/code-quality-pack": "^2.7.1"
+        "setono/code-quality-pack": "^2.7.2"
     },
     "prefer-stable": true,
     "autoload": {
