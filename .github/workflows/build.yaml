@@ -15,7 +15,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
@@ -52,8 +52,8 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
                     - "8.2"
+                    - "8.3"
 
                 dependencies:
                     - "lowest"
@@ -62,11 +62,7 @@ jobs:
                 symfony:
                     - "~6.4.0"
                     - "~7.0.0"
-                
-                exclude:
-                    -   php-version: "8.1"
-                        symfony: "~7.0.0"
-        
+
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -99,8 +95,8 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
                     - "8.2"
+                    - "8.3"
 
                 dependencies:
                     - "lowest"
@@ -109,10 +105,6 @@ jobs:
                 symfony:
                     - "~6.4.0"
                     - "~7.0.0"
-                
-                exclude:
-                    -   php-version: "8.1"
-                        symfony: "~7.0.0"
 
         steps:
             -   name: "Checkout"
@@ -143,8 +135,8 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
                     - "8.2"
+                    - "8.3"
 
                 dependencies:
                     - "lowest"
@@ -153,10 +145,6 @@ jobs:
                 symfony:
                     - "~6.4.0"
                     - "~7.0.0"
-                
-                exclude:
-                    -   php-version: "8.1"
-                        symfony: "~7.0.0"
 
         steps:
             -   name: "Checkout"
@@ -187,7 +175,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.2"
+                    - "8.3"
 
                 dependencies:
                     - "highest"
@@ -201,9 +189,6 @@ jobs:
                 with:
                     coverage: "pcov"
                     php-version: "${{ matrix.php-version }}"
-
-            -   name: "Set up problem matchers for phpunit/phpunit"
-                run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v3"
@@ -226,7 +211,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.2"
+                    - "8.3"
 
                 dependencies:
                     - "highest"

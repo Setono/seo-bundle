@@ -11,7 +11,14 @@ interface PageInterface
      */
     public function addChild(self $child): static;
 
+    public function getParent(): ?self;
+
     public function setParent(?self $parent): static;
+
+    /**
+     * Returns true if the page has a parent
+     */
+    public function hasParent(): bool;
 
     /**
      * Sets the name of the page. You can use this as a reference

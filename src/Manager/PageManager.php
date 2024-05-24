@@ -5,51 +5,38 @@ declare(strict_types=1);
 namespace Setono\SEOBundle\Manager;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Setono\Doctrine\ORMTrait;
 use Setono\SEOBundle\Discriminator\DiscriminatorInterface;
 use Setono\SEOBundle\Entity\PageInterface;
 use Setono\SEOBundle\Factory\PageFactoryInterface;
 use Setono\SEOBundle\Repository\PageRepositoryInterface;
-use Webmozart\Assert\Assert;
 
 final class PageManager implements PageManagerInterface
 {
+    use ORMTrait;
+
     public function __construct(
         private readonly DiscriminatorInterface $discriminator,
         private readonly PageRepositoryInterface $pageRepository,
         private readonly PageFactoryInterface $pageFactory,
-        private readonly ManagerRegistry $managerRegistry,
+        ManagerRegistry $managerRegistry,
     ) {
+        $this->managerRegistry = $managerRegistry;
     }
 
     public function getFromController(string $controller): PageInterface
     {
-        $discriminator = $this->discriminator->getDiscriminator();
-
         $pages = $this->pageRepository->findByController($controller);
         if ([] === $pages) {
-            $page = $this->pageFactory->createFromController($controller);
-            $manager = $this->managerRegistry->getManagerForClass($page::class);
-            if (null === $manager) {
-                throw new \RuntimeException(sprintf('Unable to get manager for class %s', $page::class));
-            }
-
-            if (null !== $discriminator) {
-                $child = $this->pageFactory->createFromController($controller);
-                $child->setDiscriminator($discriminator);
-
-                $page->addChild($child);
-            }
-
-            $manager->persist($page);
-            $manager->flush();
-
-            return $page;
+            return $this->createNewPage($controller);
         }
+
+        $discriminator = $this->discriminator->getDiscriminator();
 
         $resolvedPage = null;
 
         foreach ($pages as $page) {
-            if ($page->isParent()) {
+            if ($page->isRoot()) {
                 $resolvedPage = $page;
             }
 
@@ -61,16 +48,10 @@ final class PageManager implements PageManagerInterface
         }
 
         // this means that we have a discriminator but no page with that discriminator
-        if (null !== $resolvedPage && null !== $discriminator && $resolvedPage->isParent()) {
-            $child = $this->pageFactory->createFromController($controller);
-            $child->setDiscriminator($discriminator);
+        if (null !== $resolvedPage && null !== $discriminator && $resolvedPage->isRoot()) {
+            $child = $this->createNewChild($controller, $discriminator, $resolvedPage);
 
-            $resolvedPage->addChild($child);
-
-            $manager = $this->managerRegistry->getManagerForClass($resolvedPage::class);
-            Assert::notNull($manager);
-
-            $manager->flush();
+            $this->getManager($resolvedPage::class)->flush();
 
             $resolvedPage = $child;
         }
@@ -80,5 +61,31 @@ final class PageManager implements PageManagerInterface
         }
 
         return $resolvedPage;
+    }
+
+    private function createNewPage(string $controller): PageInterface
+    {
+        $discriminator = $this->discriminator->getDiscriminator();
+        $page = $this->pageFactory->createFromController($controller);
+        $manager = $this->getManager($page::class);
+
+        if (null !== $discriminator) {
+            $this->createNewChild($controller, $discriminator, $page);
+        }
+
+        $manager->persist($page);
+        $manager->flush();
+
+        return $page;
+    }
+
+    private function createNewChild(string $controller, string $discriminator, PageInterface $parent): PageInterface
+    {
+        $child = $this->pageFactory->createFromController($controller);
+        $child->setDiscriminator($discriminator);
+
+        $parent->addChild($child);
+
+        return $child;
     }
 }

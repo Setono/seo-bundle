@@ -10,22 +10,22 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "doctrine/collections": "1.8 || ^2.1",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^2.16",
         "doctrine/persistence": "2.5 || ^3.2",
+        "jolicode/automapper": "^9.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
+        "setono/doctrine-orm-trait": "^1.1",
         "symfony/config": "^6.4 || ^7.0",
         "symfony/dependency-injection": "^6.4 || ^7.0",
         "symfony/event-dispatcher": "^6.4 || ^7.0",
+        "symfony/expression-language": "^6.4 || ^7.0",
         "symfony/http-foundation": "^6.4 || ^7.0",
         "symfony/http-kernel": "^6.4 || ^7.0",
-        "symfony/monolog-bundle": "^3.10",
-        "symfony/property-access": "^6.4 || ^7.0",
-        "symfony/twig-bundle": "^6.4 || ^7.0",
-        "twig/twig": "^2.15 || ^3.7",
-        "webmozart/assert": "^1.11"
+        "symfony/string": "^6.4 || ^7.0",
+        "twig/twig": "^2.15 || ^3.7"
     },
     "require-dev": {
         "infection/infection": "^0.27.11",
@@ -34,7 +34,7 @@
         "phpunit/phpunit": "^9.6",
         "psalm/plugin-phpunit": "^0.19",
         "psalm/plugin-symfony": "^5.1",
-        "setono/code-quality-pack": "^2.7"
+        "setono/code-quality-pack": "^2.7.2"
     },
     "prefer-stable": true,
     "autoload": {
