@@ -6,15 +6,17 @@ namespace Setono\SEOBundle\Factory;
 
 use Setono\SEOBundle\Entity\PageInterface;
 use Setono\SEOBundle\Resolver\PageNameResolverInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-final class PageFactory implements PageFactoryInterface
+final readonly class PageFactory implements PageFactoryInterface
 {
     /**
      * @param class-string<PageInterface> $pageClass
      */
     public function __construct(
-        private readonly PageNameResolverInterface $pageNameResolver,
-        private readonly string $pageClass,
+        private RequestStack $requestStack,
+        private PageNameResolverInterface $pageNameResolver,
+        private string $pageClass,
     ) {
     }
 
@@ -25,6 +27,11 @@ final class PageFactory implements PageFactoryInterface
         $page->setController($controller)
             ->setName($this->pageNameResolver->getNameFromController($controller))
         ;
+
+        $request = $this->requestStack->getCurrentRequest();
+        if (null !== $request) {
+            $page->addExampleUrl($request->getUri());
+        }
 
         return $page;
     }
