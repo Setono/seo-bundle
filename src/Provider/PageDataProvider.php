@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Setono\SEOBundle\Provider;
 
-use AutoMapper\AutoMapper;
-use AutoMapper\AutoMapperInterface;
 use Setono\SEOBundle\Context\ControllerContextInterface;
 use Setono\SEOBundle\Data\PageData;
 use Setono\SEOBundle\DataMapper\PageDataMapperInterface;
 use Setono\SEOBundle\Factory\PageDataFactoryInterface;
 use Setono\SEOBundle\Manager\PageManagerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final readonly class PageDataProvider implements PageDataProviderInterface
 {
@@ -19,7 +18,7 @@ final readonly class PageDataProvider implements PageDataProviderInterface
         private PageManagerInterface $pageManager,
         private PageDataFactoryInterface $pageDataFactory,
         private PageDataMapperInterface $pageDataMapper,
-        private ?AutoMapperInterface $automapper = null,
+        private NormalizerInterface $normalizer,
     ) {
     }
 
@@ -28,9 +27,10 @@ final readonly class PageDataProvider implements PageDataProviderInterface
         $controller = $this->controllerContext->getController();
         $page = $this->pageManager->getFromController($controller);
 
-        $automapper = $this->automapper ?? AutoMapper::create();
-        $exampleContext = $automapper->map($context, 'array') ?? [];
-        $page->setExampleContext($exampleContext);
+        $exampleContext = $this->normalizer->normalize($context);
+        if (is_array($exampleContext)) {
+            $page->setExampleContext($exampleContext);
+        }
 
         $pageData = $this->pageDataFactory->createNew();
 
