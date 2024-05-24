@@ -145,9 +145,9 @@ class Page implements PageInterface
         return $this;
     }
 
-    public function getExampleContext(): array
+    public function getExampleContext(): ?array
     {
-        return $this->exampleContext ?? [];
+        return $this->exampleContext;
     }
 
     public function setExampleContext(?array $exampleContext): static

@@ -9,6 +9,7 @@
             <argument type="service" id="setono_seo.factory.page_data"/>
             <argument type="service" id="setono_seo.data_mapper.page_data"/>
             <argument type="service" id="serializer"/>
+            <argument type="service" id="doctrine"/>
         </service>
     </services>
 </container>

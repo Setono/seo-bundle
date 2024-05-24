@@ -39,5 +39,7 @@ interface PageInterface
 
     public function addExampleUrl(string $url): static;
 
+    public function getExampleContext(): ?array;
+
     public function setExampleContext(?array $exampleContext): static;
 }

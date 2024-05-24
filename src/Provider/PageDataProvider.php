@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\SEOBundle\Provider;
 
+use Doctrine\Persistence\ManagerRegistry;
+use Setono\Doctrine\ORMTrait;
 use Setono\SEOBundle\Context\ControllerContextInterface;
 use Setono\SEOBundle\Data\PageData;
 use Setono\SEOBundle\DataMapper\PageDataMapperInterface;
@@ -11,15 +13,19 @@ use Setono\SEOBundle\Factory\PageDataFactoryInterface;
 use Setono\SEOBundle\Manager\PageManagerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final readonly class PageDataProvider implements PageDataProviderInterface
+final class PageDataProvider implements PageDataProviderInterface
 {
+    use ORMTrait;
+
     public function __construct(
-        private ControllerContextInterface $controllerContext,
-        private PageManagerInterface $pageManager,
-        private PageDataFactoryInterface $pageDataFactory,
-        private PageDataMapperInterface $pageDataMapper,
-        private NormalizerInterface $normalizer,
+        private readonly ControllerContextInterface $controllerContext,
+        private readonly PageManagerInterface $pageManager,
+        private readonly PageDataFactoryInterface $pageDataFactory,
+        private readonly PageDataMapperInterface $pageDataMapper,
+        private readonly NormalizerInterface $normalizer,
+        ManagerRegistry $managerRegistry,
     ) {
+        $this->managerRegistry = $managerRegistry;
     }
 
     public function getPageData(array $context = []): PageData
@@ -27,9 +33,13 @@ final readonly class PageDataProvider implements PageDataProviderInterface
         $controller = $this->controllerContext->getController();
         $page = $this->pageManager->getFromController($controller);
 
-        $exampleContext = $this->normalizer->normalize($context);
-        if (is_array($exampleContext)) {
-            $page->setExampleContext($exampleContext);
+        if (null === $page->getExampleContext()) {
+            $exampleContext = $this->normalizer->normalize($context);
+            if (is_array($exampleContext)) {
+                $page->setExampleContext($exampleContext);
+            }
+
+            $this->getManager($page::class)->flush();
         }
 
         $pageData = $this->pageDataFactory->createNew();
