@@ -22,6 +22,11 @@ class Page implements PageInterface
 
     protected ?string $discriminator = null;
 
+    /** @var list<string>|null */
+    protected ?array $exampleUrls = null;
+
+    protected ?array $exampleContext = null;
+
     protected ?bool $noIndex = null;
 
     protected ?string $metaTitle = null;
@@ -107,6 +112,51 @@ class Page implements PageInterface
     public function setDiscriminator(?string $discriminator): static
     {
         $this->discriminator = $discriminator;
+
+        return $this;
+    }
+
+    public function getExampleUrls(): ?array
+    {
+        return $this->exampleUrls;
+    }
+
+    /**
+     * @param list<string>|null $exampleUrls
+     *
+     * @return $this
+     */
+    public function setExampleUrls(?array $exampleUrls): static
+    {
+        $this->exampleUrls = $exampleUrls;
+
+        return $this;
+    }
+
+    public function addExampleUrl(string $url): static
+    {
+        if (null === $this->exampleUrls) {
+            $this->exampleUrls = [];
+        }
+
+        $this->exampleUrls[] = $url;
+        $this->exampleUrls = array_values(array_unique($this->exampleUrls));
+
+        return $this;
+    }
+
+    public function getExampleContext(): array
+    {
+        return $this->exampleContext ?? [];
+    }
+
+    public function setExampleContext(?array $exampleContext): static
+    {
+        if ([] === $exampleContext) {
+            $exampleContext = null;
+        }
+
+        $this->exampleContext = $exampleContext;
 
         return $this;
     }

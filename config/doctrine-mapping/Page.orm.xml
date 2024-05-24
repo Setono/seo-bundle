@@ -16,6 +16,8 @@
         <field name="name"/>
         <field name="controller"/>
         <field name="discriminator" nullable="true"/>
+        <field name="exampleUrls" type="json" nullable="true"/>
+        <field name="exampleContext" type="json" nullable="true"/>
 
         <field name="metaTitle" type="text" nullable="true"/>
         <field name="metaDescription" type="text" nullable="true"/>

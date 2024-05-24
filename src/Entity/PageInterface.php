@@ -36,4 +36,8 @@ interface PageInterface
      * A common use case is when you have a page in multiple languages. Then you can use the discriminator to distinguish between e.g. the English and the German page.
      */
     public function setDiscriminator(?string $discriminator): static;
+
+    public function addExampleUrl(string $url): static;
+
+    public function setExampleContext(?array $exampleContext): static;
 }
