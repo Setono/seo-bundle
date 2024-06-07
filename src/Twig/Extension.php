@@ -19,7 +19,7 @@ final class Extension extends AbstractExtension
             new TwigFunction('meta_title_tag', [Runtime::class, 'metaTitleTag'], ['needs_context' => true, 'is_safe' => ['html']]),
 
             new TwigFunction('meta_description', [Runtime::class, 'metaDescription'], ['needs_context' => true]),
-            new TwigFunction('meta_descriptionTag', [Runtime::class, 'metaDescriptionTag'], ['needs_context' => true, 'is_safe' => ['html']]),
+            new TwigFunction('meta_description_tag', [Runtime::class, 'metaDescriptionTag'], ['needs_context' => true, 'is_safe' => ['html']]),
         ];
     }
 }
