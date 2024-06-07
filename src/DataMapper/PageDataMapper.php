@@ -9,9 +9,9 @@ use AutoMapper\AutoMapperInterface;
 use Setono\SEOBundle\Data\PageData;
 use Setono\SEOBundle\Entity\PageInterface;
 
-final class PageDataMapper implements PageDataMapperInterface
+final readonly class PageDataMapper implements PageDataMapperInterface
 {
-    public function __construct(private readonly ?AutoMapperInterface $automapper = null)
+    public function __construct(private ?AutoMapperInterface $automapper = null)
     {
     }
 
@@ -35,10 +35,5 @@ final class PageDataMapper implements PageDataMapperInterface
 
             $page = $page->getParent();
         } while ([] !== $unsetProperties && null !== $page);
-    }
-
-    public function supports(PageInterface $page, PageData $pageData, array $context = []): bool
-    {
-        return true;
     }
 }

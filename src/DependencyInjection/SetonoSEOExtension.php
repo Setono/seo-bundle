@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SEOBundle\DependencyInjection;
 
+use Setono\SEOBundle\DataMapper\PageDataMapperInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -32,6 +33,10 @@ final class SetonoSEOExtension extends Extension
 
         $container->setParameter('setono_seo.page.class', $config['classes']['page']);
         $container->setParameter('setono_seo.page_data.class', $config['classes']['page_data']);
+
+        $container->registerForAutoconfiguration(PageDataMapperInterface::class)
+            ->addTag('setono_seo.data_mapper')
+        ;
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');

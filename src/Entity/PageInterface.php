@@ -6,6 +6,8 @@ namespace Setono\SEOBundle\Entity;
 
 interface PageInterface
 {
+    public function getId(): ?int;
+
     /**
      * A page can have children, distinguished by the discriminator
      */

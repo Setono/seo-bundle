@@ -17,6 +17,7 @@
         "doctrine/persistence": "2.5 || ^3.2",
         "jolicode/automapper": "^9.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
+        "setono/composite-compiler-pass": "^1.1",
         "setono/doctrine-orm-trait": "^1.1",
         "symfony/config": "^6.4 || ^7.0",
         "symfony/dependency-injection": "^6.4 || ^7.0",
@@ -26,6 +27,7 @@
         "symfony/http-kernel": "^6.4 || ^7.0",
         "symfony/serializer": "^6.4 || ^7.0",
         "symfony/string": "^6.4 || ^7.0",
+        "symfony/twig-bundle": "^6.4 || ^7.0",
         "twig/twig": "^2.15 || ^3.7"
     },
     "require-dev": {

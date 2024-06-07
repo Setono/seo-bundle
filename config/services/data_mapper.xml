@@ -3,8 +3,20 @@
            xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_seo.data_mapper.page_data" class="Setono\SEOBundle\DataMapper\PageDataMapper">
+        <service id="Setono\SEOBundle\DataMapper\PageDataMapperInterface" alias="setono_seo.data_mapper.composite"/>
+
+        <service id="setono_seo.data_mapper.composite" class="Setono\SEOBundle\DataMapper\CompositeDataMapper"/>
+
+        <service id="setono_seo.data_mapper.generic" class="Setono\SEOBundle\DataMapper\PageDataMapper">
             <argument type="service" id="AutoMapper\AutoMapperInterface" on-invalid="null"/>
+
+            <tag name="setono_seo.data_mapper" priority="100"/>
+        </service>
+
+        <service id="setono_seo.data_mapper.property_accessor_based" class="Setono\SEOBundle\DataMapper\TwigBasedPageDataMapper">
+            <argument type="service" id="twig"/>
+
+            <tag name="setono_seo.data_mapper" priority="90"/>
         </service>
     </services>
 </container>

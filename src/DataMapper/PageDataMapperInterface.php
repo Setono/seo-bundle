@@ -13,9 +13,4 @@ interface PageDataMapperInterface
      * Maps the given page to the given page data
      */
     public function map(PageInterface $page, PageData $pageData, array $context = []): void;
-
-    /**
-     * Returns true if this mapper is able to map the given page to the given page data
-     */
-    public function supports(PageInterface $page, PageData $pageData, array $context = []): bool;
 }
