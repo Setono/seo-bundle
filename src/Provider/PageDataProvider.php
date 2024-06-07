@@ -11,6 +11,7 @@ use Setono\SEOBundle\Data\PageData;
 use Setono\SEOBundle\DataMapper\PageDataMapperInterface;
 use Setono\SEOBundle\Factory\PageDataFactoryInterface;
 use Setono\SEOBundle\Manager\PageManagerInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class PageDataProvider implements PageDataProviderInterface
@@ -34,7 +35,7 @@ final class PageDataProvider implements PageDataProviderInterface
         $page = $this->pageManager->getFromController($controller);
 
         if (null === $page->getExampleContext()) {
-            $exampleContext = $this->normalizer->normalize($context);
+            $exampleContext = $this->normalizer->normalize($context, null, [AbstractNormalizer::CIRCULAR_REFERENCE_LIMIT => 10]);
             if (is_array($exampleContext)) {
                 $page->setExampleContext($exampleContext);
             }
