@@ -35,7 +35,14 @@ final class PageDataProvider implements PageDataProviderInterface
         $page = $this->pageManager->getFromController($controller);
 
         if (null === $page->getExampleContext()) {
-            $exampleContext = $this->normalizer->normalize($context, null, [AbstractNormalizer::CIRCULAR_REFERENCE_LIMIT => 10]);
+            $exampleContext = $this->normalizer->normalize($context, null, [AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function (object $object): string {
+                if (method_exists($object, 'getId')) {
+                    return (string) $object->getId();
+                }
+
+                return spl_object_hash($object);
+            }]);
+
             if (is_array($exampleContext)) {
                 $page->setExampleContext($exampleContext);
             }
