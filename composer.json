@@ -17,7 +17,7 @@
         "doctrine/persistence": "2.5 || ^3.2",
         "jolicode/automapper": "^9.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
-        "setono/composite-compiler-pass": "^1.1",
+        "setono/composite-compiler-pass": "^1.2",
         "setono/doctrine-orm-trait": "^1.1",
         "symfony/config": "^6.4 || ^7.0",
         "symfony/dependency-injection": "^6.4 || ^7.0",
