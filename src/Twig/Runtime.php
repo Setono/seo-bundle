@@ -36,16 +36,14 @@ final class Runtime implements RuntimeExtensionInterface, LoggerAwareInterface
         return '';
     }
 
-    public function metaTitle(array $context): ?string
+    public function metaTitle(array $context, string $default = null): ?string
     {
-        return $this->get(function (PageData $pageData) {
-            return $pageData->metaTitle;
-        }, $context);
+        return $this->get(fn (PageData $pageData) => $pageData->metaTitle ?? $default, $context);
     }
 
-    public function metaTitleTag(array $context): string
+    public function metaTitleTag(array $context, string $default = null): string
     {
-        $title = $this->metaTitle($context);
+        $title = $this->metaTitle($context, $default);
         if (null === $title || '' === $title) {
             return '';
         }
