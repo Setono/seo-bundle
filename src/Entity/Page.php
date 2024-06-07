@@ -128,7 +128,13 @@ class Page implements PageInterface
      */
     public function setExampleUrls(?array $exampleUrls): static
     {
-        $this->exampleUrls = $exampleUrls;
+        $this->exampleUrls = null;
+
+        if (is_array($exampleUrls)) {
+            foreach ($exampleUrls as $exampleUrl) {
+                $this->addExampleUrl($exampleUrl);
+            }
+        }
 
         return $this;
     }
